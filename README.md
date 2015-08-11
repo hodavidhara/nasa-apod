@@ -6,7 +6,7 @@ NASA's Astronomy Picture of the Day API
 ## Installation
 
 ```bash
-$ npm install nodeify
+$ npm install nasa-apod
 ```
 
 ## Usage

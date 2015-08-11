@@ -7,6 +7,12 @@ var SAMPLE_RESPONSE = JSON.stringify({
     "title": "A Sagittarius Triplet"
 });
 
+var SAMPLE_RESPONSE_2 = JSON.stringify({
+    "url": "http://apod.nasa.gov/apod/image/1508/BlueMoonHalo_Hang_960.jpg",
+    "media_type": "image",
+    "explanation": "Have you ever seen a halo around the Moon? Such 22 degree rings around the Moon -- caused by ice crystals falling in the Earth's atmosphere -- are somewhat rare.  OK, but have you ever seen a blue moon? Given the modern definition of blue moon -- the second full moon occurring in a calendar month -- these are also rare.  What is featured above might therefore be considered doubly rare -- a halo surrounding a blue moon. The featured image was taken late last month near Zhongshan Station in Antarctica.  Visible in the foreground are a power generating house and a snowmobile. What might seem to be stars in the background are actually illuminated snowflakes near the camera.",
+    "title": "A Blue Moon Halo over Antarctica"});
+
 describe('apod.Client', function() {
 
     before(function () {
@@ -16,7 +22,18 @@ describe('apod.Client', function() {
                 api_key: 'test',
                 concept_tags: false
             })
+            .once()
             .reply(200, SAMPLE_RESPONSE);
+
+        nock('https://api.nasa.gov')
+            .get('/planetary/apod')
+            .query({
+                api_key: 'test',
+                concept_tags: false,
+                date: '2000-12-17'
+            })
+            .once()
+            .reply(200, SAMPLE_RESPONSE_2);
     });
 
     it('can be instantiated with no arguments', function () {
@@ -46,16 +63,19 @@ describe('apod.Client', function() {
         expect(client).to.have.property('conceptTags', false);
     });
 
-    it('requests with configured params', function (done) {
+    it('requests with configured params', function () {
         var client = new apod.Client({apiKey: 'test', conceptTags: false});
         expect(client).to.have.property('apiKey', 'test');
         expect(client).to.have.property('conceptTags', false);
 
-        client(function (err, body) {
-            expect(err).to.not.exist;
-            expect(body).to.exist;
-            expect(body).to.equal(SAMPLE_RESPONSE);
-            done();
-        })
+        return expect(client()).to.eventually.equal(SAMPLE_RESPONSE)
+    });
+
+    it('requests with configured params and date', function () {
+        var client = new apod.Client({apiKey: 'test', conceptTags: false});
+        expect(client).to.have.property('apiKey', 'test');
+        expect(client).to.have.property('conceptTags', false);
+
+        return expect(client(new Date(2000, 11, 17))).to.eventually.equal(SAMPLE_RESPONSE_2)
     });
 });

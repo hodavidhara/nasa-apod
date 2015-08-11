@@ -1,0 +1,28 @@
+{
+  "name": "nasa-apod",
+  "version": "0.0.0",
+  "description": "NASA's Astronomy Picture of the Day API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hodavidhara/nasa-apod.git"
+  },
+  "keywords": [
+    "NASA",
+    "APOD",
+    "Astronomy",
+    "Picture"
+  ],
+  "author": "David Hara <hakuhen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hodavidhara/nasa-apod/issues"
+  },
+  "homepage": "https://github.com/hodavidhara/nasa-apod#readme",
+  "dependencies": {
+    "request": "^2.60.0"
+  }
+}

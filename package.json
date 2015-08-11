@@ -1,6 +1,6 @@
 {
   "name": "nasa-apod",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "NASA's Astronomy Picture of the Day API",
   "main": "index.js",
   "scripts": {

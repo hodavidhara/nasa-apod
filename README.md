@@ -10,11 +10,25 @@ $ npm install nasa-apod
 ```
 
 ## Usage
-
+### with defaults
 ```javascript
 var apod = require('nasa-apod');
 
 apod(function(err, body) {
+  console.log(body);
+});
+```
+
+### with configuration
+```javascript
+var apod = require('nasa-apod');
+
+var client = new apod.Client({
+    apiKey: '',
+    conceptTags: true
+});
+
+client(function(err, body) {
   console.log(body);
 });
 ```

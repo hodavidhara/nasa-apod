@@ -47,7 +47,15 @@ _request = function (apiKey, conceptTags, date) {
         qs.date = isoDate.substring(0, isoDate.indexOf('T'));
     }
 
-    return request({url: APOD_ENDPOINT, qs: qs});
+    return request({url: APOD_ENDPOINT, qs: qs}).then(function (body) {
+
+        // Handle 200 responses that are actually errors.
+        if (body.error) {
+            throw new Error(body.error);
+        } else {
+            return body;
+        }
+    });
 };
 
 module.exports = apod;

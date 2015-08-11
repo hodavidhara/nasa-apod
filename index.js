@@ -27,7 +27,6 @@ apod.Client = function (args) {
 };
 
 _request = function (apiKey, conceptTags, cb) {
-    console.log(apiKey);
     request({
         url: APOD_ENDPOINT,
         qs: {

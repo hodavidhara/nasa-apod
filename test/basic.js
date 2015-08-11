@@ -20,10 +20,6 @@ describe('apod', function() {
             .reply(200, SAMPLE_RESPONSE);
     });
 
-    after(function () {
-        nock.restore();
-    });
-
     it('requests with no params', function (done) {
         apod(function (err, body) {
             expect(err).to.not.exist;

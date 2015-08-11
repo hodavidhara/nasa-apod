@@ -23,10 +23,11 @@
   },
   "homepage": "https://github.com/hodavidhara/nasa-apod#readme",
   "dependencies": {
-    "request": "^2.60.0"
+    "request-promise": "^0.4.3"
   },
   "devDependencies": {
     "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
     "mocha": "^2.2.5",
     "nock": "^2.10.0"
   }

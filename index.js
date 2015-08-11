@@ -1,4 +1,4 @@
-var request = require('request');
+var request = require('request-promise');
 
 var APOD_ENDPOINT = 'https://api.nasa.gov/planetary/apod';
 var DEFAULT_PARAMS = {
@@ -6,13 +6,23 @@ var DEFAULT_PARAMS = {
     concept_tags: true
 };
 
-var apod = function (cb) {
-    _request(DEFAULT_PARAMS.api_key, DEFAULT_PARAMS.concept_tags, cb);
+/**
+ *
+ * @param date
+ */
+var apod = function (date) {
+    return _request(DEFAULT_PARAMS.api_key, DEFAULT_PARAMS.concept_tags, date);
 };
 
+/**
+ *
+ * @param args
+ * @returns {Function}
+ * @constructor
+ */
 apod.Client = function (args) {
-    var client = function(cb) {
-        _request(that.apiKey, that.conceptTags, cb);
+    var client = function(date) {
+        return _request(that.apiKey, that.conceptTags, date);
     };
 
     args = args || {};
@@ -26,16 +36,18 @@ apod.Client = function (args) {
     return client;
 };
 
-_request = function (apiKey, conceptTags, cb) {
-    request({
-        url: APOD_ENDPOINT,
-        qs: {
-            api_key: apiKey,
-            concept_tags: conceptTags
-        }
-    }, function (err, res, body) {
-        cb(err, body);
-    });
+_request = function (apiKey, conceptTags, date) {
+    var qs = {
+        api_key: apiKey,
+        concept_tags: conceptTags
+    };
+
+    if (date) {
+        var isoDate = date.toISOString();
+        qs.date = isoDate.substring(0, isoDate.indexOf('T'));
+    }
+
+    return request({url: APOD_ENDPOINT, qs: qs});
 };
 
 module.exports = apod;

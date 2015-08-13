@@ -50,10 +50,11 @@ _request = function (apiKey, conceptTags, date) {
     return request({url: APOD_ENDPOINT, qs: qs}).then(function (body) {
 
         // Handle 200 responses that are actually errors.
-        if (body.error) {
-            throw new Error(body.error);
+        var parsed = JSON.parse(body);
+        if (parsed.error) {
+            throw new Error(parsed.error);
         } else {
-            return body;
+            return parsed;
         }
     });
 };

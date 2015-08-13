@@ -1,9 +1,9 @@
 var apod = require('../index');
 
-var OUT_OF_RANGE = JSON.stringify({
+var OUT_OF_RANGE = {
     "message": "Admins have been notified.",
     "error": "Date must be between Jun 16, 1996 and Aug 11, 2015."
-});
+};
 
 describe('error handling', function() {
 
@@ -33,6 +33,6 @@ describe('error handling', function() {
     });
 
     it('handles 200 responses that are actually errors', function () {
-        return expect(apod(new Date(1996,1, 1))).to.be.rejected;
+        return expect(apod(new Date(1996,0 , 1))).to.be.rejected;
     });
 });

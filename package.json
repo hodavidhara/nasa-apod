@@ -4,7 +4,7 @@
   "description": "NASA's Astronomy Picture of the Day API",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -23,12 +23,13 @@
   },
   "homepage": "https://github.com/hodavidhara/nasa-apod#readme",
   "dependencies": {
+    "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "chai-as-promised": "^5.1.0",
-    "mocha": "^2.2.5",
-    "nock": "^2.10.0"
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.2"
   }
 }

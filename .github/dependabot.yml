@@ -1,0 +1,19 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: nock
+    versions:
+    - 13.0.5
+    - 13.0.7
+  - dependency-name: mocha
+    versions:
+    - 8.2.1
+  - dependency-name: lodash
+    versions:
+    - 4.17.20
